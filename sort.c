@@ -44,6 +44,7 @@ void print_arr(int arr[], int left, int right) {
 void merge_sort(int arr[], int left, int right) {
     /* TODO: Implement merge sort by using divide and conquer recursively. This function should call the merge sub-routine. */ 
     int len = right-left+1;
+    /*
     print_arr(arr,left,right);
     printf("arr[%d --> %d] length: %d", left, right, len);
     if (len > 2 && right > left) {
@@ -54,7 +55,9 @@ void merge_sort(int arr[], int left, int right) {
         merge_sort(arr,left,left);
         merge_sort(arr,right,right);
     }
-    //merge(arr,left,(right-left)/2,right);
+    */
+    
+    merge(arr,left,(right-left)/2,right);
 }
 
 void merge(int arr[], int left, int mid, int right) {
