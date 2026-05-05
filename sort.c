@@ -46,7 +46,7 @@ void merge_sort(int arr[], int left, int right) {
     int len = right-left+1;
     /*
     print_arr(arr,left,right);
-    printf("arr[%d --> %d] length: %d", left, right, len);
+    printf("arr[%d --> %d] length: %d\n", left, right, len);
     if (len > 2 && right > left) {
         merge_sort(arr,left,((left+right)/2)-1);
         merge_sort(arr,((left+right)/2),right);
@@ -57,7 +57,7 @@ void merge_sort(int arr[], int left, int right) {
     }
     */
     
-    merge(arr,left,(right-left)/2,right);
+    merge(arr,left,((right-left+1)/2) ,right);
 }
 
 void merge(int arr[], int left, int mid, int right) {
@@ -84,8 +84,8 @@ void merge(int arr[], int left, int mid, int right) {
             j++;           
         }
 
-        //printf("temp arr::");
-        //print_arr(tempArr,left,right);
+        printf("temp arr::");
+        print_arr(tempArr,left,right);
         k++;
     }
     // implicit if nnot finished, copy values until. at this point one of them (i or j) must be completed by this point
@@ -94,19 +94,22 @@ void merge(int arr[], int left, int mid, int right) {
         tempArr[k] = arr[i];
         i++;
         k++;
-        //printf("temp arr::");
-        //print_arr(tempArr,left,right);
+        printf("temp arr::");
+        print_arr(tempArr,left,right);
     }
     while (j < len) {
         tempArr[k] = arr[j];
         j++;
         k++;
-        //printf("temp arr::");
-        //print_arr(tempArr,left,right);
+        printf("temp arr::");
+        print_arr(tempArr,left,right);
     }
     // copy it into arr[]
-
-    for (int n = 0; n <= len; n++) {
-        arr[n] =  tempArr[n];
+    //printf("temp arr:");
+    //print_arr(tempArr,left,right);
+    k = 0;
+    for (int n = left; n < len; n++) {
+        arr[n] =  tempArr[k];
+        k++;
     }
 }
