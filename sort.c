@@ -21,7 +21,7 @@ int main() {
     printf("\n");
     
     //merge(arr,0,n/2,n-1);
-    merge_sort(arr, 0, n - 1);
+    merge_sort(arr, 2, n - 1);
 
     printf("Sorted array: ");
     for (int i = 0; i < n; i++) {
@@ -44,9 +44,9 @@ void print_arr(int arr[], int left, int right) {
 void merge_sort(int arr[], int left, int right) {
     /* TODO: Implement merge sort by using divide and conquer recursively. This function should call the merge sub-routine. */ 
     int len = right-left+1;
-    /*
+    
     print_arr(arr,left,right);
-    printf("arr[%d --> %d] length: %d\n", left, right, len);
+    //printf("arr[%d --> %d] length: %d\n", left, right, len);
     if (len > 2 && right > left) {
         merge_sort(arr,left,((left+right)/2)-1);
         merge_sort(arr,((left+right)/2),right);
@@ -55,9 +55,9 @@ void merge_sort(int arr[], int left, int right) {
         merge_sort(arr,left,left);
         merge_sort(arr,right,right);
     }
-    */
     
-    merge(arr,left,((right-left+1)/2) ,right);
+    
+    merge(arr,left,((left+right)/2) ,right);
 }
 
 void merge(int arr[], int left, int mid, int right) {
@@ -72,7 +72,10 @@ void merge(int arr[], int left, int mid, int right) {
     int j = mid;
     int k = 0;
     
-    while (k < len && i < mid && j < len) {
+    printf("subarray: ");
+    print_arr(arr,left,right);
+    printf("left: %d, mid: %d, right: %d len: %d\n",left, mid, right, len);
+    while (k < len) {
         //printf("mid: %d, len: %d\n",mid, len);
         //printf("arr\[%d\] ? arr\[%d\]\n", i,j);
         //printf("%d ? %d\n", arr[i],arr[j]);
@@ -88,21 +91,23 @@ void merge(int arr[], int left, int mid, int right) {
         print_arr(tempArr,left,right);
         k++;
     }
+    printf("temp arr::");
+    print_arr(tempArr,left,right);
     // implicit if nnot finished, copy values until. at this point one of them (i or j) must be completed by this point
-    printf("i: %d, j: %d, k: %d, mid: %d, len: %d\n",i,j,k, mid, len);
+   
     while (i < mid) {
         tempArr[k] = arr[i];
         i++;
         k++;
-        printf("temp arr::");
-        print_arr(tempArr,left,right);
+        //printf("temp arr::");
+        //print_arr(tempArr,left,right);
     }
     while (j < len) {
         tempArr[k] = arr[j];
         j++;
         k++;
-        printf("temp arr::");
-        print_arr(tempArr,left,right);
+        //printf("temp arr::");
+        //print_arr(tempArr,left,right);
     }
     // copy it into arr[]
     //printf("temp arr:");
