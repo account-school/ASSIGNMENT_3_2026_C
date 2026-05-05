@@ -2,6 +2,7 @@
 
 void merge_sort(int arr[], int left, int right);
 void merge(int arr[], int left, int mid, int right);
+void insertInPlace(int arr[], int left, int right, int subarr[]);
 
 int main() {
     int n;
@@ -21,7 +22,7 @@ int main() {
     printf("\n");
     
     //merge(arr,0,n/2,n-1);
-    merge_sort(arr, 2, n - 1);
+    merge_sort(arr, 0, n - 1);
 
     printf("Sorted array: ");
     for (int i = 0; i < n; i++) {
@@ -43,78 +44,81 @@ void print_arr(int arr[], int left, int right) {
 }
 void merge_sort(int arr[], int left, int right) {
     /* TODO: Implement merge sort by using divide and conquer recursively. This function should call the merge sub-routine. */ 
-    int len = right-left+1;
-    
-    print_arr(arr,left,right);
-    //printf("arr[%d --> %d] length: %d\n", left, right, len);
-    if (len > 2 && right > left) {
-        merge_sort(arr,left,((left+right)/2)-1);
-        merge_sort(arr,((left+right)/2),right);
-    }
-    else if (len == 2) {
+    int len =  right-left+1;
+    int mid = (left + right)/2;
+    if (len > 2 && (right > left)) {
+        merge_sort(arr,left,mid);
+        merge_sort(arr,mid+1,right);
+    } else if (len == 2) {
         merge_sort(arr,left,left);
         merge_sort(arr,right,right);
     }
-    
-    
-    merge(arr,left,((left+right)/2) ,right);
+    merge(arr,left,mid,right);
 }
 
 void merge(int arr[], int left, int mid, int right) {
     /* TODO: Implement the merge logic. */
-    int leftlen = mid-left+1;
-    int rightlen = right-mid+1;
-    int len = right-left+1;
-    // using psuedocode on slide 10 as massive helper
-    //printf("leftLen: %d, rightLen: %d len: %d ",leftlen, rightlen, len);
-    int tempArr[len];
-    int i = left;
-    int j = mid;
-    int k = 0;
+    // temp arrays, as teacher said in office hours
+    int leftSide[mid-left+1];
+    int lenLeft = mid - left + 1;
+    int lenRight = right-mid;
+    int rightSide[right-mid]; // no +1 because the last one already includes mid
+    int len = right- left + 1;
+    int tempArray[len];
+    //
+
+    int q = 0;
+    for (int n = left; n <=mid; n++) {
+        leftSide[q] = arr[n];
+        q++;
+    }
+
+    q = 0;
+    for (int n = mid+1; n <= right; n++) {
+        rightSide[q] = arr[n];
+        q++;
+    }
+
+    int i = 0;
+    int j = 0;
     
-    printf("subarray: ");
-    print_arr(arr,left,right);
-    printf("left: %d, mid: %d, right: %d len: %d\n",left, mid, right, len);
-    while (k < len) {
-        //printf("mid: %d, len: %d\n",mid, len);
-        //printf("arr\[%d\] ? arr\[%d\]\n", i,j);
-        //printf("%d ? %d\n", arr[i],arr[j]);
-        if (arr[i] <= arr[j]) {
-            tempArr[k] = arr[i];
+    int k  = 0;
+
+    while ((k < len) && (i < lenLeft) && (j < lenRight)) {
+        if (leftSide[i] <= rightSide[j]) {
+            tempArray[k] = leftSide[i];
             i++;
         } else {
-            tempArr[k] = arr[j];
-            j++;           
+            tempArray[k] = rightSide[j];
+            j++;
         }
-
-        printf("temp arr::");
-        print_arr(tempArr,left,right);
         k++;
     }
-    printf("temp arr::");
-    print_arr(tempArr,left,right);
-    // implicit if nnot finished, copy values until. at this point one of them (i or j) must be completed by this point
-   
-    while (i < mid) {
-        tempArr[k] = arr[i];
+
+    while (i < lenLeft) {
+        tempArray[k] = leftSide[i];
         i++;
         k++;
-        //printf("temp arr::");
-        //print_arr(tempArr,left,right);
     }
-    while (j < len) {
-        tempArr[k] = arr[j];
+    while (j < lenRight) {
+        tempArray[k] = rightSide[j];
         j++;
         k++;
-        //printf("temp arr::");
-        //print_arr(tempArr,left,right);
     }
-    // copy it into arr[]
-    //printf("temp arr:");
-    //print_arr(tempArr,left,right);
-    k = 0;
-    for (int n = left; n < len; n++) {
-        arr[n] =  tempArr[k];
+    
+
+    insertInPlace(arr,left,right,tempArray);
+
+
+}
+
+
+void insertInPlace(int arr[], int left, int right, int subarr[]) {
+    int lenSubArr = right-left+1;
+    int k = 0;
+    
+    for (int n = left; n <= right; n++) {
+        arr[n] = subarr[k];
         k++;
     }
 }

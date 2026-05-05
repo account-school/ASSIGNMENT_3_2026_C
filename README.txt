@@ -100,3 +100,7 @@ Focus on the core concepts and principles your solution utilizes.
 
 
 
+YAYYY IT WORKS! THE TEACHER HELPED ME IN LAB AND TOLD ME THE KIND OF MINDSET AND CONCEPTUALLY HELPED ME A LOT.
+
+
+
