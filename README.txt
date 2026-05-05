@@ -100,7 +100,48 @@ Focus on the core concepts and principles your solution utilizes.
 
 
 
-YAYYY IT WORKS! THE TEACHER HELPED ME IN LAB AND TOLD ME THE KIND OF MINDSET AND CONCEPTUALLY HELPED ME A LOT.
+YAYYY IT WORKS! THE TEACHER HELPED ME IN OFFICE HOURSE AND TOLD ME THE KIND OF MINDSET AND CONCEPTUALLY HELPED ME A LOT.
+
+
+So basically the difference between what I tried to do and what the teacher helped with was 
+
+1) making sure that merging a subarray into a larger array worked without needing to return or copy the array
+[pass by reference] (this is a separate function called insertInPlace)
+
+2) separating the merge steps by copying the left-mid & mid+1 right  into two seperate left and right temp arrays before merging them into a new tempArray
+to then use the above function
+
+3) realizing that the length of the right array could be calculated by right-mid, if the length of the left one includes mid, (left one calculated by mid-left+1);
+since
+
+if we have [0 1 2 3];
+
+right = 3
+left = 0
+mid = (left + right) / 2 = 1
+len right and left = 2
+
+
+3-1 = 2
+
+and
+
+1 - 0 + 1 = 2
+
+thereby evenly splitting it
+
+in an odd lengthed case:
+
+[0 1 2 3 4]
+
+right = 4
+left = 0
+mid = 2
+
+4- 2 = 2 [3 4]
+2 - 0 + 1 = 3 [0 1 2]
+
+with a relatively even split.
 
 
 
